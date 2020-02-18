@@ -1,23 +1,22 @@
 
 var express = require('express');
-var Socket = require('socket.io');
+var app = express();
+var path = require('path');
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+var port = process.env.PORT || 3000;
 
-//App Setup
-var App = express();
+server.listen(port, () => {
+  console.log('Server listening at port %d', port);
+});
 
-
-var server = App.listen(8080,function(){
-
-    console.log('Listening on port 8080');
-})
-
-//static file
-App.use(express.static('Public'));
+// Routing
+app.use(express.static(path.join(__dirname, 'public')));
 
 //Socket Setup
 //We want socket.io to work on this socket and listen for connection
 
-var io = Socket(server);
+//var io = Socket(server);
 var username;
 
 //listen for connection
