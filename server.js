@@ -8,7 +8,7 @@ var App = express();
 
 var server = App.listen(8080,function(){
 
-    console.log('Listening on port 3000');
+    console.log('Listening on port 8080');
 })
 
 //static file
