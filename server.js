@@ -6,7 +6,7 @@ var Socket = require('socket.io');
 var App = express();
 
 
-var server = App.listen(3000,function(){
+var server = App.listen(8080,function(){
 
     console.log('Listening on port 3000');
 })
