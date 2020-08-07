@@ -9,7 +9,7 @@ var ip;
 
 app.get("/", function (req, res) {
   console.log("This", req.ip);
-  //res.send("hello world");
+  res.send("hello world ip is ", req.ip);
 });
 
 server.listen(port, (data) => {
