@@ -5,8 +5,16 @@ var server = require("http").createServer(app);
 var io = require("socket.io")(server);
 var port = process.env.PORT || 3000;
 
-server.listen(port, () => {
+var ip;
+
+app.get("/", function (req, res) {
+  console.log("This", req.ip);
+  //res.send("hello world");
+});
+
+server.listen(port, (data) => {
   console.log("Server listening at port %d", port);
+  console.log("Some data", data);
 });
 
 // Routing
@@ -17,7 +25,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 //var io = Socket(server);
 var username;
-var ip;
+
 //listen for connection
 io.on("connection", function (socket) {
   ip = socket.handshake.address;
