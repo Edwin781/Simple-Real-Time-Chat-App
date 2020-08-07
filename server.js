@@ -3,7 +3,6 @@ var app = express();
 var path = require("path");
 var server = require("http").createServer(app);
 var io = require("socket.io")(server);
-const expressip = require("express-ip");
 var port = process.env.PORT || 3000;
 
 var ip;
@@ -11,9 +10,11 @@ var ip;
 //app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", function (req, res) {
-  const ipInfo = req.ipInfo;
-  var message = `Hey, you are browsing from ${ipInfo.city}, ${ipInfo.country}`;
-  res.send(`hello world ip is ${message}`);
+  var ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+  if (ip.substr(0, 7) == "::ffff:") {
+    ip = ip.substr(7);
+  }
+  res.send(`hello world ip is ${ip}`);
 });
 
 server.listen(port, (data) => {

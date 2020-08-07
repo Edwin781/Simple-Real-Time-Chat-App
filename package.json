@@ -19,8 +19,8 @@
   "homepage": "https://github.com/Edwinbiz/MyProject#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "express-ip": "^1.0.4",
     "nodemon": "^2.0.4",
+    "request-ip": "^2.1.3",
     "socket.io": "^2.3.0"
   }
 }
