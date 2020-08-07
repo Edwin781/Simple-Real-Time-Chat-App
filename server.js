@@ -3,6 +3,7 @@ var app = express();
 var path = require("path");
 var server = require("http").createServer(app);
 var io = require("socket.io")(server);
+const expressip = require("express-ip");
 var port = process.env.PORT || 3000;
 
 var ip;
@@ -10,8 +11,9 @@ var ip;
 //app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", function (req, res) {
-  console.log("This", req.ip);
-  res.send(`hello world ip is ${req.ip}`);
+  const ipInfo = req.ipInfo;
+  var message = `Hey, you are browsing from ${ipInfo.city}, ${ipInfo.country}`;
+  res.send(`hello world ip is ${message}`);
 });
 
 server.listen(port, (data) => {
