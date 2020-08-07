@@ -20,6 +20,36 @@ app.get("/", function (req, res) {
   res.send(`Page Works`);
 });
 
+app.get("/:id", (req, res) => {
+  let Id = req.params.id;
+  if (Id === "Singles") {
+    ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
+    if (ip.substr(0, 7) == "::ffff:") {
+      ip = ip.substr(7);
+    }
+    console.log(`Singles worked ip is ${ip}`);
+    // console.log("Singles worked");
+  }
+
+  switch (Id) {
+    case "Singles":
+      console.log(`Singles worked (this is for the fgc babe) ip is ${ip}`);
+      res.send(`Page Works`);
+      break;
+
+    case "MeetNew":
+      console.log(`MeetNew worked ip is ${ip}`);
+      res.send(`Page Works`);
+      break;
+
+    default:
+      console.log(`Random request ip is ${ip}`);
+      res.send(`Page Works`);
+  }
+});
+
+app.get("", () => {});
+
 server.listen(port, (data) => {
   console.log("Server listening at port %d", port);
 });
