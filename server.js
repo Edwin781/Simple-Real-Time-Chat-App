@@ -16,11 +16,17 @@ App.use(express.static("Public"));
 
 var io = Socket(server);
 var username;
-
+var ip;
 //listen for connection
 io.on("connection", function (socket) {
+  ip = socket.handshake.address;
   console.log("Socket info", socket.handshake.address);
   console.log("New User Connected", socket.id);
+
+  io.sockets.emit("logger", {
+    Username,
+    ip,
+  });
 
   socket.on("chat", function (data) {
     username = data.handle;
