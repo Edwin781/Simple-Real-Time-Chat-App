@@ -50,14 +50,13 @@ Socket.on("chat", function (data) {
 });
 
 //get user log test
-Socket.on("logger", (data) => {
-  console.log(`Current logged in user detail ${data}`);
+Socket.on("logger", ({ username, ip }) => {
+  console.log(`Current logged in user detail ${username} and ${ip}`);
 });
 
 Socket.on("Username", function (data) {
   currentuser = data;
 });
-i;
 
 Socket.on("typing", function (data) {
   feedback.innerHTML = "<p><em>" + data + " is typing a message..</em></p>";
