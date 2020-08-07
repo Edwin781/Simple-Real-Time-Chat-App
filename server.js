@@ -9,14 +9,15 @@ var port = process.env.PORT || 3000;
 var ip;
 
 //Routing
-app.use(express.static(path.join(__dirname, "public")));
+//app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", function (req, res) {
   ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress;
   if (ip.substr(0, 7) == "::ffff:") {
     ip = ip.substr(7);
   }
-  res.send(`hello world ip is ${ip}`);
+  console.log(`hello world ip is ${ip}`);
+  res.send(`Page Works`);
 });
 
 server.listen(port, (data) => {
@@ -35,36 +36,36 @@ getmydata = (ip) => {
 //var io = Socket(server);
 var username;
 
-//listen for connection
-io.on("connection", function (socket) {
-  ip = getmydata(socket.handshake.address);
-  //   console.log("this is it", ip);
-  //   console.log("Socket info", socket.handshake.address);
-  console.log("New User Connected", socket.id);
+// //listen for connection
+// io.on("connection", function (socket) {
+//   ip = getmydata(socket.handshake.address);
+//   //   console.log("this is it", ip);
+//   //   console.log("Socket info", socket.handshake.address);
+//   console.log("New User Connected", socket.id);
 
-  socket.on("chat", function (data) {
-    username = data.handle;
-    io.sockets.emit("chat", data);
-  });
+//   socket.on("chat", function (data) {
+//     username = data.handle;
+//     io.sockets.emit("chat", data);
+//   });
 
-  socket.on("Username", function (data) {
-    /* var username = socket.data;
-         socket.emit('CurrentUser',username) */
+//   socket.on("Username", function (data) {
+//     /* var username = socket.data;
+//          socket.emit('CurrentUser',username) */
 
-    var username = data.handle;
+//     var username = data.handle;
 
-    console.log(`Current user detail is ${username} and Ip -> ${ip}`);
-    /* io.sockets.emit("logger", {
-      username,
-      ip,
-    }); */
-  });
+//     console.log(`Current user detail is ${username} and Ip -> ${ip}`);
+//     /* io.sockets.emit("logger", {
+//       username,
+//       ip,
+//     }); */
+//   });
 
-  socket.on("disconnect", function () {
-    socket.broadcast.emit("user-left", username);
-  });
+//   socket.on("disconnect", function () {
+//     socket.broadcast.emit("user-left", username);
+//   });
 
-  socket.on("typing", function (data) {
-    socket.broadcast.emit("typing", data);
-  });
-});
+//   socket.on("typing", function (data) {
+//     socket.broadcast.emit("typing", data);
+//   });
+// });
